@@ -90,3 +90,7 @@ E:\Projects\GitMaster\Post\Post\obj\Debug\Post.csproj.CoreCompileInputs.cache
 E:\Projects\GitMaster\Post\Post\obj\Debug\Post.csproj.CopyComplete
 E:\Projects\GitMaster\Post\Post\obj\Debug\Post.dll
 E:\Projects\GitMaster\Post\Post\obj\Debug\Post.pdb
+E:\Projects\GitMaster\Post\Post\bin\PagedList.dll
+E:\Projects\GitMaster\Post\Post\bin\PagedList.Mvc.dll
+E:\Projects\GitMaster\Post\Post\bin\PagedList.xml
+E:\Projects\GitMaster\Post\Post\bin\PagedList.Mvc.xml

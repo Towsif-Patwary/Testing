@@ -1,40 +1,66 @@
-﻿@model IEnumerable<Post_Entity.tbl_Post>
+﻿@using PagedList.Mvc;
+@using PagedList;
+@model IPagedList<Post_Entity.tbl_Post>
 
 @{
     ViewBag.Title = "Posts";
 }
 
+<br />
+<p>
+    @using (Html.BeginForm("Index", "Home", FormMethod.Get))
+    {
+        @Html.TextBox("search") <input type="submit" value="search" />
+    }
+</p>
+<br />
 <table class="table table-bordered table-striped">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.PostName)
+            @Html.DisplayNameFor(model => model.First().PostName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.PostDate)
+            @Html.DisplayNameFor(model => model.First().PostDate)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.TotalComments)
+            @Html.DisplayNameFor(model => model.First().TotalComments)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.tbl_User.UserName)
+            @Html.DisplayNameFor(model => model.First().tbl_User.UserName)
         </th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.PostName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PostDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TotalComments)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.tbl_User.UserName)
-        </td>
-    </tr>
-}
-
+    @if (Model.Count() == 0)
+    {
+        <tr>
+            <td colspan="4">
+                No records match search criteria
+            </td>
+        </tr>
+    }
+    else
+    {
+        foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PostName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PostDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TotalComments)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.tbl_User.UserName)
+                </td>
+            </tr>
+        }
+    }
 </table>
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page, search = Request.QueryString["search"] }),
+    new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded,
+        /*DisplayPageCountAndCurrentLocation = true*/
+        DisplayItemSliceAndTotal = true
+    })
