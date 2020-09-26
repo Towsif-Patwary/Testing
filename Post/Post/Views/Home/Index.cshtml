@@ -17,16 +17,16 @@
 <table class="table table-bordered table-striped">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.First().PostName)
+            Post
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.First().PostDate)
+            User
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.First().TotalComments)
+            Post Date
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.First().tbl_User.UserName)
+            Total Comments
         </th>
     </tr>
 
@@ -47,20 +47,42 @@
                     @Html.DisplayFor(modelItem => item.PostName)
                 </td>
                 <td>
+                    @Html.DisplayFor(modelItem => item.tbl_User.UserName)
+                </td>
+                <td>
                     @Html.DisplayFor(modelItem => item.PostDate)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.TotalComments)
                 </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.tbl_User.UserName)
-                </td>
             </tr>
+
+
+            foreach (var comment in item.tbl_Comment)
+            {
+                <tr>
+                    <td>
+                        @comment.CommentDescription
+                    </td>
+                    <td>
+                        @comment.tbl_User.UserName
+                    </td>
+                    <td>
+                        @comment.CommentDate
+                    </td>
+                    <td>
+                        Likes: @comment.LikeCount, Dislikes: @comment.DislikeCount
+                    </td>
+                </tr>
+            }
+
         }
     }
 </table>
 @Html.PagedListPager(Model, page => Url.Action("Index", new { page, search = Request.QueryString["search"] }),
-    new PagedListRenderOptions() { Display = PagedListDisplayMode.IfNeeded,
+    new PagedListRenderOptions()
+    {
+        Display = PagedListDisplayMode.IfNeeded,
         /*DisplayPageCountAndCurrentLocation = true*/
         DisplayItemSliceAndTotal = true
     })
