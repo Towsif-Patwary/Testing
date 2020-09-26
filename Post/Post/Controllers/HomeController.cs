@@ -16,6 +16,7 @@ namespace Post.Controllers
 
         //public ActionResult Index()
         //{
+        //      DateTime.Now
         //    return View(_postManager.GetAll());
         //}
 

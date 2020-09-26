@@ -14,8 +14,21 @@
     }
 </p>
 <br />
+
+@*<div class="panel-group">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+        Panel Header
+        </div>
+
+        <div class="panel-body">
+        Panel Content
+        </div>
+    </div>
+</div>*@
+
 <table class="table table-bordered table-striped">
-    <tr>
+    @*<tr>
         <th>
             Post
         </th>
@@ -28,7 +41,7 @@
         <th>
             Total Comments
         </th>
-    </tr>
+    </tr>*@
 
     @if (Model.Count() == 0)
     {
@@ -42,7 +55,7 @@
     {
         foreach (var item in Model)
         {
-            <tr>
+            <tr style="background-color:green; color:white; font-weight:bold;">
                 <td>
                     @Html.DisplayFor(modelItem => item.PostName)
                 </td>
