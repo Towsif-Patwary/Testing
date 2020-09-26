@@ -1,0 +1,118 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="PostDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="tbl_Comment">
+    <Key>
+      <PropertyRef Name="CommentId" />
+    </Key>
+    <Property Name="CommentId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CommentDescription" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="CommentDate" Type="DateTime" Precision="3" />
+    <Property Name="UserId" Type="Int64" Nullable="false" />
+    <Property Name="LikeCount" Type="Int32" />
+    <Property Name="DislikeCount" Type="Int32" />
+    <Property Name="PostId" Type="Int64" Nullable="false" />
+    <NavigationProperty Name="tbl_Post" Relationship="Self.FK_tbl_Comment_PostId" FromRole="tbl_Comment" ToRole="tbl_Post" />
+    <NavigationProperty Name="tbl_User" Relationship="Self.FK_tbl_Comment_UserId" FromRole="tbl_Comment" ToRole="tbl_User" />
+  </EntityType>
+  <EntityType Name="tbl_Post">
+    <Key>
+      <PropertyRef Name="PostId" />
+    </Key>
+    <Property Name="PostId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PostName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="PostDate" Type="DateTime" Precision="3" />
+    <Property Name="UserId" Type="Int64" Nullable="false" />
+    <Property Name="TotalComments" Type="Int32" />
+    <NavigationProperty Name="tbl_Comment" Relationship="Self.FK_tbl_Comment_PostId" FromRole="tbl_Post" ToRole="tbl_Comment" />
+    <NavigationProperty Name="tbl_User" Relationship="Self.FK_tbl_Post_UserId" FromRole="tbl_Post" ToRole="tbl_User" />
+  </EntityType>
+  <EntityType Name="tbl_Role">
+    <Key>
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="RoleId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RoleName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="tbl_User" Relationship="Self.FK_tbl_User_RoleId" FromRole="tbl_Role" ToRole="tbl_User" />
+  </EntityType>
+  <EntityType Name="tbl_User">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="RoleId" Type="Int64" Nullable="false" />
+    <NavigationProperty Name="tbl_Comment" Relationship="Self.FK_tbl_Comment_UserId" FromRole="tbl_User" ToRole="tbl_Comment" />
+    <NavigationProperty Name="tbl_Post" Relationship="Self.FK_tbl_Post_UserId" FromRole="tbl_User" ToRole="tbl_Post" />
+    <NavigationProperty Name="tbl_Role" Relationship="Self.FK_tbl_User_RoleId" FromRole="tbl_User" ToRole="tbl_Role" />
+  </EntityType>
+  <Association Name="FK_tbl_Comment_PostId">
+    <End Role="tbl_Post" Type="Self.tbl_Post" Multiplicity="1" />
+    <End Role="tbl_Comment" Type="Self.tbl_Comment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_Post">
+        <PropertyRef Name="PostId" />
+      </Principal>
+      <Dependent Role="tbl_Comment">
+        <PropertyRef Name="PostId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbl_Comment_UserId">
+    <End Role="tbl_User" Type="Self.tbl_User" Multiplicity="1" />
+    <End Role="tbl_Comment" Type="Self.tbl_Comment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_User">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="tbl_Comment">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbl_Post_UserId">
+    <End Role="tbl_User" Type="Self.tbl_User" Multiplicity="1" />
+    <End Role="tbl_Post" Type="Self.tbl_Post" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_User">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="tbl_Post">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbl_User_RoleId">
+    <End Role="tbl_Role" Type="Self.tbl_Role" Multiplicity="1" />
+    <End Role="tbl_User" Type="Self.tbl_User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_Role">
+        <PropertyRef Name="RoleId" />
+      </Principal>
+      <Dependent Role="tbl_User">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="PostDBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="tbl_Comment" EntityType="Self.tbl_Comment" />
+    <EntitySet Name="tbl_Post" EntityType="Self.tbl_Post" />
+    <EntitySet Name="tbl_Role" EntityType="Self.tbl_Role" />
+    <EntitySet Name="tbl_User" EntityType="Self.tbl_User" />
+    <AssociationSet Name="FK_tbl_Comment_PostId" Association="Self.FK_tbl_Comment_PostId">
+      <End Role="tbl_Post" EntitySet="tbl_Post" />
+      <End Role="tbl_Comment" EntitySet="tbl_Comment" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbl_Comment_UserId" Association="Self.FK_tbl_Comment_UserId">
+      <End Role="tbl_User" EntitySet="tbl_User" />
+      <End Role="tbl_Comment" EntitySet="tbl_Comment" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbl_Post_UserId" Association="Self.FK_tbl_Post_UserId">
+      <End Role="tbl_User" EntitySet="tbl_User" />
+      <End Role="tbl_Post" EntitySet="tbl_Post" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbl_User_RoleId" Association="Self.FK_tbl_User_RoleId">
+      <End Role="tbl_Role" EntitySet="tbl_Role" />
+      <End Role="tbl_User" EntitySet="tbl_User" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

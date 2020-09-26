@@ -1,0 +1,40 @@
+﻿@model IEnumerable<Post_Entity.tbl_Post>
+
+@{
+    ViewBag.Title = "Posts";
+}
+
+<table class="table table-bordered table-striped">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.PostName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PostDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TotalComments)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tbl_User.UserName)
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.PostName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PostDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TotalComments)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tbl_User.UserName)
+        </td>
+    </tr>
+}
+
+</table>

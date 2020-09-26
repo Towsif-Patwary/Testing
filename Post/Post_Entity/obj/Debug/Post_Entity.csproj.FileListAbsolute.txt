@@ -1,0 +1,12 @@
+E:\Projects\GitMaster\Post\Post_Entity\bin\Debug\Post_Entity.dll.config
+E:\Projects\GitMaster\Post\Post_Entity\bin\Debug\Post_Entity.dll
+E:\Projects\GitMaster\Post\Post_Entity\bin\Debug\Post_Entity.pdb
+E:\Projects\GitMaster\Post\Post_Entity\bin\Debug\EntityFramework.dll
+E:\Projects\GitMaster\Post\Post_Entity\bin\Debug\EntityFramework.SqlServer.dll
+E:\Projects\GitMaster\Post\Post_Entity\bin\Debug\EntityFramework.xml
+E:\Projects\GitMaster\Post\Post_Entity\bin\Debug\EntityFramework.SqlServer.xml
+E:\Projects\GitMaster\Post\Post_Entity\obj\Debug\Post_Entity.csprojAssemblyReference.cache
+E:\Projects\GitMaster\Post\Post_Entity\obj\Debug\Post_Entity.csproj.CoreCompileInputs.cache
+E:\Projects\GitMaster\Post\Post_Entity\obj\Debug\Post_Entity.csproj.CopyComplete
+E:\Projects\GitMaster\Post\Post_Entity\obj\Debug\Post_Entity.dll
+E:\Projects\GitMaster\Post\Post_Entity\obj\Debug\Post_Entity.pdb
